@@ -2,23 +2,41 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vorher & Nachher Slider</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #ffffff;
+      background: #fff;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .carousel {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 2rem;
+    }
+    .carousel::-webkit-scrollbar {
+      display: none;
     }
     .slider-container {
       position: relative;
-      max-width: 800px;
-      margin: 2rem auto;
+      width: 600px;
+      height: 400px;
+      border-radius: 15px;
       overflow: hidden;
-      height: auto;
+      scroll-snap-align: center;
+      flex: 0 0 auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .slider-image {
+    .slider-image,
+    .slider-overlay img {
       width: 100%;
-      display: block;
+      height: 100%;
+      object-fit: cover;
     }
     .slider-overlay {
       position: absolute;
@@ -27,83 +45,92 @@
       width: 50%;
       height: 100%;
       overflow: hidden;
-    }
-    .slider-overlay img {
-      width: 100%;
-      height: auto;
-      display: block;
+      border-radius: 15px 0 0 15px;
     }
     .slider-handle {
       position: absolute;
       top: 0;
       left: 50%;
+      transform: translateX(-2px);
       width: 4px;
-      background: yellow;
       height: 100%;
-      cursor: ew-resize;
+      background: linear-gradient(to bottom, gold, yellow);
       z-index: 10;
+      cursor: ew-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slider-handle::before {
+      content: "◀ ▶";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <!-- SLIDER 1 -->
-<div class="slider-container" id="slider1">
-  <img src="https://i.imgur.com/n8Xx1Tv.jpg" class="slider-image" alt="Vorher 1">
-  <div class="slider-overlay">
-    <img src="https://i.imgur.com/AdNzqED.jpg" alt="Nachher 1">
-  </div>
-  <div class="slider-handle"></div>
-</div>
-
-  <!-- SLIDER 2 -->
-  <div class="slider-container" id="slider2">
-    <img src="VORHER_BILD_2_URL" class="slider-image" alt="Vorher 2">
-    <div class="slider-overlay">
-      <img src="NACHHER_BILD_2_URL" alt="Nachher 2">
+  <div class="carousel">
+    <!-- SLIDER 1 -->
+    <div class="slider-container" id="slider1">
+      <img src="https://i.imgur.com/n8Xx1Tv.jpg" class="slider-image" alt="Vorher 1">
+      <div class="slider-overlay">
+        <img src="https://i.imgur.com/AdNzqED.jpg" alt="Nachher 1">
+      </div>
+      <div class="slider-handle"></div>
     </div>
-    <div class="slider-handle"></div>
-  </div>
 
-  <!-- SLIDER 3 -->
-  <div class="slider-container" id="slider3">
-    <img src="VORHER_BILD_3_URL" class="slider-image" alt="Vorher 3">
-    <div class="slider-overlay">
-      <img src="NACHHER_BILD_3_URL" alt="Nachher 3">
+    <!-- Weitere Slider (Platzhalter) -->
+    <div class="slider-container" id="slider2">
+      <img src="VORHER_BILD_2_URL" class="slider-image" alt="Vorher 2">
+      <div class="slider-overlay">
+        <img src="NACHHER_BILD_2_URL" alt="Nachher 2">
+      </div>
+      <div class="slider-handle"></div>
     </div>
-    <div class="slider-handle"></div>
-  </div>
 
-  <!-- SLIDER 4 -->
-  <div class="slider-container" id="slider4">
-    <img src="VORHER_BILD_4_URL" class="slider-image" alt="Vorher 4">
-    <div class="slider-overlay">
-      <img src="NACHHER_BILD_4_URL" alt="Nachher 4">
+    <div class="slider-container" id="slider3">
+      <img src="VORHER_BILD_3_URL" class="slider-image" alt="Vorher 3">
+      <div class="slider-overlay">
+        <img src="NACHHER_BILD_3_URL" alt="Nachher 3">
+      </div>
+      <div class="slider-handle"></div>
     </div>
-    <div class="slider-handle"></div>
-  </div>
 
-  <!-- SLIDER 5 -->
-  <div class="slider-container" id="slider5">
-    <img src="VORHER_BILD_5_URL" class="slider-image" alt="Vorher 5">
-    <div class="slider-overlay">
-      <img src="NACHHER_BILD_5_URL" alt="Nachher 5">
+    <div class="slider-container" id="slider4">
+      <img src="VORHER_BILD_4_URL" class="slider-image" alt="Vorher 4">
+      <div class="slider-overlay">
+        <img src="NACHHER_BILD_4_URL" alt="Nachher 4">
+      </div>
+      <div class="slider-handle"></div>
     </div>
-    <div class="slider-handle"></div>
-  </div>
 
-  <!-- SLIDER 6 -->
-  <div class="slider-container" id="slider6">
-    <img src="VORHER_BILD_6_URL" class="slider-image" alt="Vorher 6">
-    <div class="slider-overlay">
-      <img src="NACHHER_BILD_6_URL" alt="Nachher 6">
+    <div class="slider-container" id="slider5">
+      <img src="VORHER_BILD_5_URL" class="slider-image" alt="Vorher 5">
+      <div class="slider-overlay">
+        <img src="NACHHER_BILD_5_URL" alt="Nachher 5">
+      </div>
+      <div class="slider-handle"></div>
     </div>
-    <div class="slider-handle"></div>
+
+    <div class="slider-container" id="slider6">
+      <img src="VORHER_BILD_6_URL" class="slider-image" alt="Vorher 6">
+      <div class="slider-overlay">
+        <img src="NACHHER_BILD_6_URL" alt="Nachher 6">
+      </div>
+      <div class="slider-handle"></div>
+    </div>
   </div>
 
   <script>
     const sliders = document.querySelectorAll('.slider-container');
 
-    sliders.forEach((container) => {
+    sliders.forEach(container => {
       const overlay = container.querySelector('.slider-overlay');
       const handle = container.querySelector('.slider-handle');
 
@@ -131,6 +158,3 @@
   </script>
 </body>
 </html>
-
-initialer Slider-Code
-
