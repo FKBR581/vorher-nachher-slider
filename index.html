@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vorher & Nachher Slider</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #ffffff;
+    }
+    .slider-container {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+      overflow: hidden;
+      height: auto;
+    }
+    .slider-image {
+      width: 100%;
+      display: block;
+    }
+    .slider-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slider-overlay img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      background: yellow;
+      height: 100%;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <!-- SLIDER 1 -->
+  <div class="slider-container" id="slider1">
+    <img src="https://imgur.com/a/LHRxa70" class="slider-image" alt="Vorher 1">
+    <div class="slider-overlay">
+      <img src="https://imgur.com/AdNzqED" alt="Nachher 1">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <!-- SLIDER 2 -->
+  <div class="slider-container" id="slider2">
+    <img src="VORHER_BILD_2_URL" class="slider-image" alt="Vorher 2">
+    <div class="slider-overlay">
+      <img src="NACHHER_BILD_2_URL" alt="Nachher 2">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <!-- SLIDER 3 -->
+  <div class="slider-container" id="slider3">
+    <img src="VORHER_BILD_3_URL" class="slider-image" alt="Vorher 3">
+    <div class="slider-overlay">
+      <img src="NACHHER_BILD_3_URL" alt="Nachher 3">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <!-- SLIDER 4 -->
+  <div class="slider-container" id="slider4">
+    <img src="VORHER_BILD_4_URL" class="slider-image" alt="Vorher 4">
+    <div class="slider-overlay">
+      <img src="NACHHER_BILD_4_URL" alt="Nachher 4">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <!-- SLIDER 5 -->
+  <div class="slider-container" id="slider5">
+    <img src="VORHER_BILD_5_URL" class="slider-image" alt="Vorher 5">
+    <div class="slider-overlay">
+      <img src="NACHHER_BILD_5_URL" alt="Nachher 5">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <!-- SLIDER 6 -->
+  <div class="slider-container" id="slider6">
+    <img src="VORHER_BILD_6_URL" class="slider-image" alt="Vorher 6">
+    <div class="slider-overlay">
+      <img src="NACHHER_BILD_6_URL" alt="Nachher 6">
+    </div>
+    <div class="slider-handle"></div>
+  </div>
+
+  <script>
+    const sliders = document.querySelectorAll('.slider-container');
+
+    sliders.forEach((container) => {
+      const overlay = container.querySelector('.slider-overlay');
+      const handle = container.querySelector('.slider-handle');
+
+      const startSlide = (e) => {
+        e.preventDefault();
+        window.addEventListener('mousemove', moveSlide);
+        window.addEventListener('mouseup', stopSlide);
+      };
+
+      const moveSlide = (e) => {
+        let rect = container.getBoundingClientRect();
+        let offset = e.clientX - rect.left;
+        let percent = Math.max(0, Math.min(offset / rect.width, 1)) * 100;
+        overlay.style.width = percent + '%';
+        handle.style.left = percent + '%';
+      };
+
+      const stopSlide = () => {
+        window.removeEventListener('mousemove', moveSlide);
+        window.removeEventListener('mouseup', stopSlide);
+      };
+
+      handle.addEventListener('mousedown', startSlide);
+    });
+  </script>
+</body>
+</html>
+
+initialer Slider-Code
 
